@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.io master/client example</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <h1>Socket.io master/client example (client)</h1>
+    <p>The code below will be updated by the master page (i.e. by the "teacher")</p>
+    <h4>Code</h4>
+    <pre>
+        <code id="client-code" class="html"></code>
+    </pre>
+    <h4>Result</h4>
+    <div id="result-code"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //Identify the interactive element of the page
+        var codeBox = document.getElementById("client-code");
+        var codeResult = document.getElementById("result-code");
+        //Start the socket connection
+        var socket = io();
+        socket.on('client-update', function (code) {
+            codeBox.textContent = code;
+            codeResult.innerHTML = code;
+            hljs.highlightBlock(codeBox);
+        });
+    </script>
+</body>
+
+</html>

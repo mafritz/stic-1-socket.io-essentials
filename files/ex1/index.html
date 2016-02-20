@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.io server emit example</title>
+</head>
+
+<body>
+
+    <h1>Socket.io server emit example</h1>
+    <p>Open the console of your browser, a message will appear every time a new connection is made to the socket (e.g. <a href="/" target="_blank">open a new tab</a> and then come back here to see the console)</p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //Start the socket connection
+        var socket = io();
+        //Listen for the "for everyone" event from the server
+        socket.on('for everyone', function (msg) {
+            console.log(msg)
+        });
+        //Listen for the "just for you my socket" event from the server
+        socket.on('just for you my socket', function (msg) {
+            console.log(msg)
+        });
+        //Listen for the "for everyone else" event from the server
+        socket.on('for everyone else', function (msg) {
+            console.log(msg);
+        });
+    </script>
+</body>
+
+</html>

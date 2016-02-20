@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.io simple chat example</title>
+</head>
+
+<body>
+
+    <h1>Socket.io simple chat example</h1>
+    <p>Use the text input to send a message to the server:</p>
+    <input id="messageTxt" type="text">
+    <button id="sendBtn">Send</button>
+    <ul id="messagesList">
+        <!-- Dynamically generated list of messages sent from the different clients connected to the server -->
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //Start the socket connection
+        var socket = io();
+        //Listen for the "user connected" event
+        socket.on('user connected', function () {
+            console.log("A new user has connected!")
+        });
+        //Identify the interactive elements in the DOM
+        var msg = document.getElementById("messageTxt");
+        var btn = document.getElementById("sendBtn");
+        var list = document.getElementById("messagesList");
+        //Send a message when the user clicks on the button
+        btn.addEventListener('click', function () {
+            //Emit a message event with the content of the text input as value
+            socket.emit('messageFromClient', msg.value);
+            msg.value = '';
+        });
+        //Add the content of each message that the clients receive from the server
+        socket.on('messageFromServer', function (data) {
+            var item = document.createElement('li');
+            item.innerHTML = data;
+            list.appendChild(item);
+        });
+    </script>
+</body>
+
+</html>

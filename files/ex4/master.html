@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.io master/client example</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body>
+    <h1>Socket.io master/client example (master)</h1>
+    <p>Update the textarea below with some html+css+js code that will be broadcasted to clients</p>
+    <textarea id="master-code" rows="20" cols="40"></textarea>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //Identify the interactive element of the page
+        var codeBox = document.getElementById("master-code");
+        //Start the socket connection
+        var socket = io();
+        codeBox.onkeyup = function () {
+            socket.emit('master-update', codeBox.value);
+        }
+    </script>
+</body>
+
+</html>
